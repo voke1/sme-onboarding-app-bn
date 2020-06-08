@@ -38,6 +38,7 @@ export class UserController {
         @Req() req,
         @Res() res,
     ): Promise<User> {
+        console.log('This is User: ', user)
         return await this.UserService.signIn(user, res);
     }
 
