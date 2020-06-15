@@ -23,12 +23,11 @@ export class UserService {
                 );
             }
             user.password = await bcrypt.hash(user.password, 6);
-            const userCreated = await new this.clientModel(user)
+            const userCreated = await new this.clientModel(user);
             if (userCreated) {
                 userCreated.save()
                 return this.responseService.requestSuccessful(res, user);
             }
-
         } catch (error) {
             return this.responseService.serverError(res, error.message);
         }
@@ -52,7 +51,6 @@ export class UserService {
                     res,
                     'User not found',
                 );
-
             }
 
         } catch (error) {
