@@ -58,4 +58,18 @@ export class UserService {
         }
 
     }
+
+
+
+    async getProfile(user, res): Promise<User> {
+        try {
+            
+
+        } catch (error) {
+            return this.responseService.serverError(res, error.message);
+        }
+
+    }
+
+    
 }

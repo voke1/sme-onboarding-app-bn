@@ -42,5 +42,15 @@ export class UserController {
         return await this.UserService.signIn(user, res);
     }
 
+    @Get('profile')
+    async findProfile(
+        @Body() user: User,
+        @Req() req,
+        @Res() res,
+    ): Promise<User> {
+        console.log('This is User: ', user)
+        return await this.UserService.getProfile(user);
+    }
+
 
 }
