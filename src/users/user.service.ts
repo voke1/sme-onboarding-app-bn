@@ -77,19 +77,19 @@ export class UserService {
         } catch (error) {
             return this.responseService.serverError(res, error.message);
         }
-
     }
 
-    async updateProfile(email, res): Promise<User> {
-        try {
-            const user = await this.clientModel.findOne({ email });
-            if (user) {
 
-                return this.responseService.requestSuccessful(res, user);
+    async updateProfile(user, id, res): Promise<User> {
+        try {
+            const response = await this.clientModel.findByIdAndUpdate(id, user, { new: true });
+            if (response) {
+
+                return this.responseService.requestSuccessful(res, response);
             } else {
                 return this.responseService.clientError(
                     res,
-                    'User not found',
+                    'Error!, User not updated',
                 );
             }
 

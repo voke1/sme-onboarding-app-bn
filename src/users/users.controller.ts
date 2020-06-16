@@ -55,11 +55,12 @@ export class UserController {
     @Put('profile/:id')
     async searchProfile(
         @Param('id') id,
+        @Body() user,
         @Req() req,
         @Res() res,
     ): Promise<User> {
         console.log('This is Email: ', id)
-        return await this.UserService.updateProfile(id, res);
+        return await this.UserService.updateProfile(user, id, res);
     }
 
 
