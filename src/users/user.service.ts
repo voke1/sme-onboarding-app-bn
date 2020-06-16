@@ -61,9 +61,18 @@ export class UserService {
 
 
 
-    async getProfile(user, res): Promise<User> {
+    async getProfile(email, res): Promise<User> {
         try {
-            
+            const user = await this.clientModel.findOne({ email });
+            if (user) {
+
+                return this.responseService.requestSuccessful(res, user);
+            } else {
+                return this.responseService.clientError(
+                    res,
+                    'User not found',
+                );
+            }
 
         } catch (error) {
             return this.responseService.serverError(res, error.message);
@@ -71,5 +80,23 @@ export class UserService {
 
     }
 
-    
+    async updateProfile(email, res): Promise<User> {
+        try {
+            const user = await this.clientModel.findOne({ email });
+            if (user) {
+
+                return this.responseService.requestSuccessful(res, user);
+            } else {
+                return this.responseService.clientError(
+                    res,
+                    'User not found',
+                );
+            }
+
+        } catch (error) {
+            return this.responseService.serverError(res, error.message);
+        }
+
+    }
+
 }

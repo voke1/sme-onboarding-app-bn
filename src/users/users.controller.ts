@@ -42,15 +42,27 @@ export class UserController {
         return await this.UserService.signIn(user, res);
     }
 
-    @Get('profile')
+    @Get('profile/:id')
     async findProfile(
-        @Body() user: User,
+        @Param('id') id,
         @Req() req,
         @Res() res,
     ): Promise<User> {
-        console.log('This is User: ', user)
-        return await this.UserService.getProfile(user);
+        console.log('This is Email: ', id)
+        return await this.UserService.getProfile(id, res);
     }
+
+    @Put('profile/:id')
+    async searchProfile(
+        @Param('id') id,
+        @Req() req,
+        @Res() res,
+    ): Promise<User> {
+        console.log('This is Email: ', id)
+        return await this.UserService.updateProfile(id, res);
+    }
+
+
 
 
 }
