@@ -67,6 +67,25 @@ export class SmeService {
     }
 
 
+    async updateSme(Sme, id, res): Promise<Sme> {
+        try {
+            const response = await this.SmeModel.findByIdAndUpdate(id, Sme, { new: true });
+            if (response) {
+
+                return this.responseService.requestSuccessful(res, response);
+            } else {
+                return this.responseService.clientError(
+                    res,
+                    'Error!, Sme not updated',
+                );
+            }
+
+        } catch (error) {
+            return this.responseService.serverError(res, error.message);
+        }
+
+    }
+
     async deleteSme(id: string): Promise<Sme> {
         return await this.SmeModel.findByIdAndRemove(id);
     }

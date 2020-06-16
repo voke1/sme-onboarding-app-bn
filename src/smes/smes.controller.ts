@@ -37,14 +37,21 @@ export class SmeController {
     }
 
     @Get('Sme/:SmeId')
-
     findSme(@Param('SmeId') SmeId,
         @Req() req,
         @Res() res
-       ): Promise<Sme[]> {
+    ): Promise<Sme[]> {
         return this.SmeService.getSme(SmeId, res);
     }
 
+    @Put('sme/:smeId')
+    updateSme(@Param('smeId') smeId,
+        @Body() Sme,
+        @Req() req,
+        @Res() res
+    ): Promise<Sme> {
+        return this.SmeService.updateSme(Sme, smeId, res);
+    }
 
     @Delete('Sme/:SmeId')
     delete(@Param('SmeId') id): Promise<Sme> {
