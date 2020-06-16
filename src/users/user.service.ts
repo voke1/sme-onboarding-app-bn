@@ -99,4 +99,35 @@ export class UserService {
 
     }
 
+
+    async changePassword(user, email, res): Promise<User> {
+        try {
+
+            const response = await this.clientModel.findOne({email});
+           
+            if(user.new_password !== user.new_password_confirmation){
+                return this.responseService.clientError(
+                    res,
+                    'Error! please confirm new password!',
+                );
+            } else if (user.current_password !== response.password){
+
+                return this.responseService.clientError(
+                    res,
+                    'please confirm current password!',
+                );
+            }
+            else {
+                const result = await this.clientModel.updateOne(
+                    { password: user.new_password },
+                );
+                return this.responseService.requestSuccessful(res, result);
+            } 
+
+        } catch (error) {
+            return this.responseService.serverError(res, error.message);
+        }
+
+    }
+
 }

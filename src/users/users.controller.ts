@@ -62,6 +62,16 @@ export class UserController {
         console.log('This is Email: ', id)
         return await this.UserService.updateProfile(user, id, res);
     }
+    @Put('profile/update/:id')
+    async updateProfile(
+        @Param('id') id,
+        @Body() user,
+        @Req() req,
+        @Res() res,
+    ): Promise<User> {
+        console.log('This is Email: ', id)
+        return await this.UserService.changePassword(user, id, res);
+    }
 
 
 
